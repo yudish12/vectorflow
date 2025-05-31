@@ -9,14 +9,11 @@ export const BaseNode = ({
   handleGap = 20,
   handleOffset = 10,
   minHeight = 80,
-  width = 200,
+  width = 280,
 }) => {
-  // Common styles
   const baseStyle = {
     width,
     minHeight,
-    border: "1px solid black",
-    position: "relative",
     ...style,
   };
 
@@ -27,7 +24,10 @@ export const BaseNode = ({
   };
 
   return (
-    <div style={baseStyle}>
+    <div 
+      style={baseStyle}
+      className="bg-white rounded-xl shadow-lg border border-gray-200 transition-all duration-200 hover:shadow-xl"
+    >
       {targetHandles.map((input, index) => (
         <Handle
           key={`input-${index}`}
@@ -35,9 +35,12 @@ export const BaseNode = ({
           position={Position.Left}
           id={`${id}-${input.id}`}
           style={{ top: calculateHandlePosition(index, targetHandles.length) }}
+          className="!w-4 !h-4 !bg-blue-500 hover:!bg-blue-600 transition-colors !border-2 !border-white"
         />
       ))}
-      {children}
+      <div className="p-5">
+        {children}
+      </div>
       {sourceHandles.map((output, index) => (
         <Handle
           key={`output-${index}`}
@@ -45,6 +48,7 @@ export const BaseNode = ({
           position={Position.Right}
           id={`${id}-${output.id}`}
           style={{ top: calculateHandlePosition(index, sourceHandles.length) }}
+          className="!w-4 !h-4 !bg-blue-500 hover:!bg-blue-600 transition-colors !border-2 !border-white"
         />
       ))}
     </div>
